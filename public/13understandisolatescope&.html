@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="choreApp">
+    <div ng-controller="ChoreCtrl">
+        <kid done="logChore(chore1)">777
+            <button class="btn btn-primary">transclude</button>
+        </kid>
+    </div>
+</div>
+
+</body>
+<script>
+    var app = angular.module('choreApp',[]);
+
+    app.controller("ChoreCtrl",function($scope){
+        $scope.logChore = function(chore){
+            alert(chore+" is done!");
+        };
+    });
+
+    app.directive("kid",function(){
+        return{
+            restrict:"E",
+            transclude:true,
+            scope:{
+                done:"&"
+            },
+            template:'<input type="text" ng-model="chore">{{chore}}' +
+            '<button class="btn btn-warning" ng-click="done({chore1:chore})"> iam done!</button>'
+        }
+    });
+</script>
+
+</html>

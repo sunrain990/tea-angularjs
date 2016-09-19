@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular la</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="app">
+
+    <div ng-controller="FirstCtrl">
+        <input type="text" ng-model="data.message">
+        <button class="{{data.message}}">测试</button>
+    </div>
+    <div ng-controller="SecondCtrl">
+        <input type="text" ng-model="data.message">
+        <button class="{{data.message}}">测试</button>
+    </div>
+    <div ng-controller="ThirdCtrl">
+        <input type="text" ng-model="data.message">
+        <button class="{{data.message}}">测试</button>
+    </div>
+
+</div>
+
+</body>
+<script>
+    var app = angular.module('app',[]);
+
+    app.controller('FirstCtrl',function($scope){
+//        $scope.data.message = 'btn btn-primary';
+    });
+
+    app.controller('SecondCtrl',function($scope){
+//        $scope.data.message = 'btn btn-primary';
+    });
+
+    app.controller('ThirdCtrl',function($scope){
+//        $scope.data.message = 'btn btn-primary';
+    });
+
+</script>
+
+
+</html>

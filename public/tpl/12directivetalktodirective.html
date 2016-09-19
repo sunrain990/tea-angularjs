@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+<style>
+    .green{
+        background: green;
+    }
+</style>
+
+<div ng-app="superApp">
+    <superhero strength speed flight>superman</superhero>
+    <superhero speed>speed</superhero>
+    <superhero strength>strength</superhero>
+    <superhero flight>flight</superhero>
+</div>
+
+</body>
+<script>
+    var app = angular.module('superApp',[]);
+
+    app.directive('superhero',function(){
+        return{
+            restrict:"E",
+            scope:{},
+            controller:function($scope){
+                $scope.abilities = [];
+                this.addStrength = function(){
+                    $scope.abilities.push("strength");
+                };
+                this.addSpeed = function(){
+                    $scope.abilities.push("speed");
+                };
+                this.addFlight = function(){
+                    $scope.abilities.push("flight");
+                };
+            },
+            link:function(scope,element){
+                element.addClass('green');
+                element.bind("mouseenter",function(){
+                    console.log(scope.abilities);
+                });
+            }
+        };
+    });
+
+    app.directive('strength',function(){
+        return{
+            require:"superhero",
+            link:function(scope,element,attrs,superheroCtrl){
+                superheroCtrl.addStrength();
+            }
+        }
+    });
+
+    app.directive('speed',function(){
+        return{
+            require:"superhero",
+            link:function(scope,element,attrs,superheroCtrl){
+                superheroCtrl.addSpeed();
+            }
+        }
+    });
+
+    app.directive('flight',function(){
+        return{
+            require:"superhero",
+            link:function(scope,element,attrs,superheroCtrl){
+                superheroCtrl.addFlight();
+            }
+        }
+    })
+</script>
+
+</html>

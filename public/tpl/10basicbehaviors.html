@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="behaviorApp">
+    <button enter leave enter1="btn btn-danger">hello world</button>
+</div>
+
+</body>
+<script>
+    var app = angular.module('behaviorApp',[]);
+
+    app.directive("enter",function(){
+        return function(scope,element,attrs){
+            element.bind("mouseenter",function(){
+                console.log(attrs);
+                $(this).addClass();
+//                element.addClass("btn btn-warning");
+                console.log("i'am inside");
+            });
+        }
+    });
+
+    app.directive("leave",function(){
+        return function(scope,element){
+            element.bind("mouseleave",function(){
+//                element.removeClass("btn btn-warning");
+                console.log("i am leaving on a jet plane!");
+            });
+        }
+    });
+
+</script>
+
+</html>

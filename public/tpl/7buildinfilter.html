@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="app">
+
+    <div ng-controller="AvengersCtrl">
+        <input type="text" ng-model="search.character">
+        <table>
+            <tr ng-repeat="actor in avengers.cast|orderBy:'name'|limitTo:5">
+                <td>{{actor.name|lowercase}}</td>
+                <td>{{actor.character|uppercase}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+</div>
+
+</body>
+<script>
+    var app = angular.module('app',[]);
+    app.factory('Avengers',function(){
+        var Avengers = {};
+        Avengers.cast = [
+            {
+                name: "Robert Downey Jr.",
+                character: "Tony Stark / Iron Man"
+            },
+            {
+                name: "Chris Evans",
+                character: "Steve Rogers / Captain America"
+            },
+            {
+                name: "Mark Ruffalo",
+                character: "Bruce Banner / The Hulk}"
+            },
+            {
+                name: "Chris Hemsworth",
+                character: "Thor"
+            },
+            {
+                name: "Scarlett Johansson",
+                character: "Natasha Romanoff / Black Widow"
+            },
+            {
+                name: "Jeremy Renner",
+                character: "Clint Barton / Hawkeye"
+            },
+            {
+                name: "Tom Hiddleston",
+                character: "Loki"
+            },
+            {
+                name: "Clark Gregg",
+                character: "Agent Phil Coulson"
+            },
+            {
+                name: "Cobie Smulders",
+                character: "Agent Maria Hill"
+            }
+        ];
+        return Avengers;
+    });
+
+    app.controller('AvengersCtrl',function($scope,Avengers){
+        $scope.avengers = Avengers;
+    });
+
+</script>
+
+</html>

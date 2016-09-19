@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="twitterApp">
+    <div ng-controller="AppCtrl">
+        <div enter="loadMoreTweets()">Rool over to load more tweets</div>
+    </div>
+</div>
+
+</body>
+<script>
+    var app = angular.module('twitterApp',[]);
+
+    app.controller("AppCtrl",function($scope){
+        $scope.loadMoreTweets = function(){
+            alert('Loading tweets!');
+        }
+
+        $scope.deleteTweets = function(){
+            alert('deleting tweets');
+        }
+    });
+
+    app.directive('enter',function(){
+        return function(scope,element,attrs){
+            element.bind('mouseenter',function(){
+                scope.$apply(attrs.enter);
+            });
+        }
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+
+<html ng-app='todos'>
+
+<head>
+    <title>通用功能测试演示</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+    <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/angular.js/1.4.3/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+    <link href="//cdn.bootcss.com/sweetalert/1.1.0/sweetalert.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/sweetalert/1.1.0/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../_css/common.css" type="text/css">
+</head>
+
+<body>
+
+<div ng-controller="TodoController">
+    <h1>Todos</h1>
+    <h4>{{todos.length}} total</h4>
+    <ul>
+      <li ng-repeat="todo in filteredTodos">{{todo.text}}</li>
+    </ul>
+    <pagination
+      ng-model="currentPage"
+      total-items="todos.length"
+      max-size="maxSize"
+      boundary-links="true">
+    </pagination>
+
+</div>
+
+
+
+        <script>
+            var todos = angular.module('todos', ['ui.bootstrap']);
+
+            todos.controller('TodoController', function($scope) {
+                 $scope.filteredTodos = []
+                ,$scope.currentPage = 1
+                ,$scope.numPerPage = 10
+                ,$scope.maxSize = 5;
+
+                $scope.makeTodos = function() {
+                    $scope.todos = [];
+                    for (i=1;i<=1000;i++) {
+                        $scope.todos.push({ text:'todo '+i, done:false});
+                    }
+                };
+            $scope.makeTodos();
+
+                $scope.$watch('currentPage + numPerPage', function() {
+                    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                    , end = begin + $scope.numPerPage;
+
+                    $scope.filteredTodos = $scope.todos.slice(begin, end);
+                });
+            });
+
+        </script>
+</body>
+
+</html>

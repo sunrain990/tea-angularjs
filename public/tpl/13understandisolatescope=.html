@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="drinkApp">
+    <div ng-controller="AppCtrl">
+
+
+        <input ng-model="ctrlFlavor" type="text">
+        <div drink flavor="strawberry"></div>
+
+        <div drink flavor="{{ctrlFlavor}}"></div>
+
+
+    </div>
+</div>
+
+</body>
+<script>
+    var app = angular.module('drinkApp',[]);
+
+    app.controller('AppCtrl',function($scope){
+        $scope.ctrlFlavor = "blackberry";
+    });
+
+    app.directive('drink',function(){
+        return{
+            scope:{
+                flavor:"@"
+            },
+            template:'<div>{{flavor}}</div>',
+//            link:function(scope,element,attrs){
+//                scope.flavor = attrs.flavor;
+//            }
+        }
+    });
+</script>
+
+</html>

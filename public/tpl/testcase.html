@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular la</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="app">
+
+    <div ng-controller="FirstCtrl">
+        <input type="text" ng-model="data.message">
+        <h1>{{data.message}}</h1>
+    </div>
+
+
+
+    <div ng-controller="SecondCtrl">
+        <input type="text" ng-model="data.message">
+        <h1>{{data.message|reverse}}</h1>
+    </div>
+
+</div>
+
+</body>
+<script>
+    var app = angular.module('app',[]);
+    app.factory('Data',function(){
+        return {message:"i'm data from a service"}
+    });
+    app.filter('reverse',function(){
+        return function(text){
+            return text.split("").reverse().join("");
+        }
+    });
+    app.controller('FirstCtrl',function($scope,Data){
+        $scope.data = Data;
+    });
+    app.controller('SecondCtrl',function($scope,Data){
+        $scope.data = Data;
+
+        $scope.reversedMessage = function(){
+            return $scope.data.message.split("").reverse().join("");
+        }
+    });
+
+    describe('filter',function(){
+        beforeEach(module('app'));
+        describe('reverse',function(){
+            it('should reverse a string',inject(function(reverseFilter){
+                expect(reverseFilter('ABCD')).toEqual('DCBA');
+            }))
+        });
+    })
+</script>
+
+</html>

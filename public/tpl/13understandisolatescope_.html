@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="phoneApp">
+    <div ng-controller="AppCtrl">
+        <phone number="555-1234" network="network" make-call="leaveVoicemail(number,message)"></phone>
+        <phone number="867-5309" network="network" make-call="leaveVoicemail(number,message)"></phone>
+        <phone number="911" network="network" make-call="leaveVoicemail(number,message)"></phone>
+
+    </div>
+</div>
+
+</body>
+<script>
+    var app = angular.module("phoneApp",[]);
+
+    app.controller("AppCtrl",function($scope){
+        $scope.leaveVoicemail = function (number,message){
+            alert("Number: " + number + " said: " + message)
+        }
+    })
+
+    app.directive("phone",function(){
+        return {
+            restrict:"E",
+            scope:{
+                number:"@",
+                network:"=",
+                makeCall:"&"
+            },
+            template:'<div class="panel">Number: {{number}} Network:<select ng-model="network" ng-options="net for net in networks"></select>' +
+            '<input type="text" ng-model="value">' +
+            '<div class="button" ng-click="makeCall({number:number, message:value})">Call home!</div></div>',
+            link: function(scope){
+                scope.networks = ["Verizon","AT&T","Sprint"];
+                scope.network = scope.networks[0]
+            }
+        }
+    })
+</script>
+
+</html>

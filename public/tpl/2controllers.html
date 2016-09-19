@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn angular la</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="app">
+    <div ng-controller="FirstCtrl">
+        <h1>{{data.message +" world"}}</h1>
+        <button class="{{data.message}}">
+            Wrap me with a bootstrap component
+        </button>
+    </div>
+</div>
+
+</body>
+<script>
+    var app = angular.module('app',[]);
+    app.controller('FirstCtrl',function($scope){
+        $scope.data ={message:"btn btn-primary"};
+    });
+</script>
+
+</html>
