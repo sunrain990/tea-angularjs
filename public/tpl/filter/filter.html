@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../../js/angular.min.js"></script>
+    <title>Title</title>
+</head>
+<body ng-app="app">
+    <div ng-controller="FilterCtrl">
+        <input type="text" ng-model="filterStu">
+        {{ filterStu }}
+
+        <div ng-repeat="student in students|filter:filterAge track by $index">
+            {{ student.name }} 今年  <a style="color: red">{{ student.age}}</a>岁
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module('app', []);
+
+        app.filter('reverse', function() {
+            return function(text) {
+                return text.split('').reverse().join('');
+            }
+        })
+        app.filter('larger', function() {
+            return function(text) {
+                return text ==20;
+            }
+        })
+
+        app.controller('FilterCtrl', function($scope) {
+            $scope.filterAge = function(item) {
+                return item.age >= 20
+            }
+
+//            $scope.filterAge = {
+//                name: 'sun3'
+//            }
+
+            $scope.students = [
+                {
+                    name: 'zhao1',
+                    gender: '男',
+                    age: 18
+                },
+                {
+                    name: 'qian2',
+                    gender: '男',
+                    age: 19
+                },
+                {
+                    name: 'sun3',
+                    gender: '男',
+                    age: 20
+                },
+                {
+                    name: 'li4',
+                    gender: '男',
+                    age: 21
+                },
+                {
+                    name: 'zhou5',
+                    gender: '男',
+                    age: 22
+                },
+            ]
+        });
+
+    </script>
+</body>
+</html>

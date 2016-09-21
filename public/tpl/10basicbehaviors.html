@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>learn angular</title>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/angular.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/angular.min.js"></script>
 </head>
 <body>
 
 <div ng-app="behaviorApp">
-    <button enter leave enter1="btn btn-danger">hello world</button>
+    <button enter leave enter1="btn btn-danger" leave1>hello world</button>
 </div>
 
 </body>
@@ -37,6 +37,34 @@
                 console.log("i am leaving on a jet plane!");
             });
         }
+    });
+
+    app.directive("leave1", function() {
+       return {
+           restrict: "A",
+           link: function(scope, element, attrs) {
+               console.log(attrs.leave1)
+               element.bind("mouseleave", function() {
+                   console.log("i am leaving ...")
+                   $(this).removeClass()
+               })
+           }
+       }
+    });
+
+
+    app.directive("enter1",function(){
+        return {
+            restrict: "A",
+            link: function(scope,element,attrs){
+                element.bind("mouseenter",function(){
+                    console.log(attrs.enter1);
+                    $(this).addClass(attrs.enter1);
+                    console.log("i'am inside1");
+                });
+            }
+        }
+
     });
 
 </script>
